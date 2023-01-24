@@ -42,6 +42,7 @@ SHARED_APPS = [
     'rest_framework',
     'drf_yasg',
     "phonenumber_field",
+    'event',
 ]
 
 TENANT_APPS = [
@@ -99,7 +100,7 @@ WSGI_APPLICATION = 'TomTenent.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django_tenants.postgresql_backend",
-        "NAME": os.environ.get("DB_NAME", 'TomTenents'),
+        "NAME": os.environ.get("DB_NAME", 'tenant_dj'),
         "USER": os.environ.get("DB_USER", "postgres"),
         "PASSWORD": os.environ.get("DB_PASS", "postgres"),
         "HOST": os.environ.get("DB_HOST", "localhost"),

@@ -10,12 +10,12 @@ class PossiblePhoneNumberField(PhoneNumberField):
 
 
 class Client(models.Model):
-    account_number = models.CharField(max_length=255)
+    account_number = models.CharField(max_length=255, null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='client_user', null=True, blank=False)
     name = models.CharField(max_length=255)  # client name
     client_note = models.TextField(max_length=600, blank=True, null=True)
     # general
-    company = models.CharField(max_length=600, blank=False, null=False)
+    company = models.CharField(max_length=600, blank=False, null=True)
     phone = PossiblePhoneNumberField(blank=True, default="")
 
     LICENSES = (
