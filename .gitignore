@@ -1,7 +1,7 @@
 # git rm client/__pycache__ -r --cached
 
-.env/
-env/
+.env
+env
 *.pyc
 __pycache__/
 
