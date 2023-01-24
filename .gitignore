@@ -1,14 +1,15 @@
-.idea
-db.sqlite3
+# git rm client/__pycache__ -r --cached
+
+.env/
+env/
+*.pyc
+__pycache__/
+
+# **/migrations/**
+# !**/migrations
+# !**/migrations/__init__.py
 **/migrations/*
 !**/migrations/__init__.py
-!.gitignore
-.env
-env
-venv
-__pycache__/
-pyvenv.cfg
-migrations/
 
-Lib
-Scripts
+.idea/
+*.idea/

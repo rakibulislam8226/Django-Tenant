@@ -16,7 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-gh)**!(33x1-pz#vnjgy^
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 #  public
@@ -43,6 +41,7 @@ SHARED_APPS = [
     'sweet_shared',
     'rest_framework',
     'drf_yasg',
+    "phonenumber_field",
 ]
 
 TENANT_APPS = [
@@ -58,9 +57,8 @@ TENANT_APPS = [
 ]
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
 
-TENANT_MODEL = "client.Client" # app.Model
-TENANT_DOMAIN_MODEL = "client.Domain"  # app.Model
-
+TENANT_MODEL = "event.Event"  # app.Model
+TENANT_DOMAIN_MODEL = "event.EventDomain"  # app.Model
 
 MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
@@ -94,7 +92,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'TomTenent.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -114,7 +111,6 @@ DATABASE_ROUTERS = (
     'django_tenants.routers.TenantSyncRouter',
 )
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -133,7 +129,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -144,7 +139,6 @@ TIME_ZONE = 'Asia/Dhaka'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -157,4 +151,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # allow all subdomain
-# SHOW_PUBLIC_IF_NO_TENANT_FOUND =True
+SHOW_PUBLIC_IF_NO_TENANT_FOUND = True
+
+HOST_DOMAIN_NAME = str(os.environ.get("HOST_DOMAIN_NAME", "localhost"))

@@ -3,6 +3,7 @@ from django_tenants.admin import TenantAdminMixin
 
 from .models import Client
 
+
 @admin.register(Client)
-class ClientAdmin(TenantAdminMixin, admin.ModelAdmin):
-        list_display = ('name','created_on')
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ('name', 'account_number', 'phone')
