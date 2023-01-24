@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-gh)**!(33x1-pz#vnjgy^so1!)l2vft0y2nu5*4ftu8d25o(l%'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-gh)**!(33x1-pz#vnjgy^so1!)l2vft0y2nu5*4ftu8d25o(l%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -97,16 +98,18 @@ WSGI_APPLICATION = 'TomTenent.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': 'TomTenents',
-        'USER': 'postgres',
-        'PASSWORD': 'rakib',
-        'HOST': 'localhost',
-        'PORT': '',
+    "default": {
+        "ENGINE": "django_tenants.postgresql_backend",
+        "NAME": os.environ.get("DB_NAME", 'TomTenents'),
+        "USER": os.environ.get("DB_USER", "postgres"),
+        "PASSWORD": os.environ.get("DB_PASS", "postgres"),
+        "HOST": os.environ.get("DB_HOST", "localhost"),
+        "PORT": os.environ.get("DB_PORT", "5432"),
     }
 }
+
 DATABASE_ROUTERS = (
     'django_tenants.routers.TenantSyncRouter',
 )
@@ -153,4 +156,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SHOW_PUBLIC_IF_NO_TENANT_FOUND =True
+# allow all subdomain
+# SHOW_PUBLIC_IF_NO_TENANT_FOUND =True
